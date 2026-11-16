@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -23,3 +23,105 @@
       </ul>
     </nav>
   </header>
+
+  <main id="main">
+    <section class="panel hero" aria-labelledby="hero-title">
+      <p class="eyebrow">University support, made simple</p>
+      <h2 id="hero-title">Get the guidance you need. <span class="accent">Book time that works.</span></h2>
+      <p class="lead">Find lecturers and academic advisers, check their consultation hours, and request a meeting in a few simple steps.</p>
+      <div class="steps">
+        <article class="step"><h3>1. Choose a staff member</h3><p>Search by name, department or topic.</p></article>
+        <article class="step"><h3>2. Pick a free slot</h3><p>Occupied slots cannot be selected.</p></article>
+        <article class="step"><h3>3. Get a booking summary</h3><p>See your request details instantly.</p></article>
+      </div>
+      <a class="btn" href="#schedules">Explore staff</a>
+    </section>
+
+    <ul class="stats" aria-label="Summary figures">
+      <li><strong id="statStaff">0</strong><span>Staff members</span></li>
+      <li><strong id="statSlots">0</strong><span>Open slots</span></li>
+      <li><strong id="statRequests">0</strong><span>Requests this session</span></li>
+      <li><strong>3</strong><span>Simple booking steps</span></li>
+    </ul>
+
+    <section class="panel" id="schedules" aria-labelledby="sched-title">
+      <h2 id="sched-title">Staff consultation schedules</h2>
+      <div class="filters">
+        <div class="field grow">
+          <label for="searchBox">Search by staff member, department or topic</label>
+          <input type="search" id="searchBox" placeholder="e.g. Database, Mathematics, Dr. Atim">
+        </div>
+        <div class="field">
+          <label for="deptFilter">Department</label>
+          <select id="deptFilter"></select>
+        </div>
+        <button type="button" class="btn btn-light" id="clearBtn">Clear</button>
+      </div>
+      <p id="resultCount" role="status"></p>
+      <div id="staffList" class="staff-grid"></div>
+      <p id="emptyState" class="state state-empty" hidden>No staff member matches your search. Try another name, department or topic.</p>
+    </section>
+
+    <section class="panel" id="booking" aria-labelledby="book-title">
+      <h2 id="book-title">Book a consultation</h2>
+      <div class="booking-layout">
+        <form id="bookingForm" novalidate>
+          <div class="field">
+            <label for="staffSelect">Staff member</label>
+            <select id="staffSelect" required></select>
+            <span class="error" id="err-staffSelect"></span>
+          </div>
+          <div class="field">
+            <label for="slotSelect">Available time slot</label>
+            <select id="slotSelect" required></select>
+            <span class="error" id="err-slotSelect"></span>
+          </div>
+          <div class="row">
+            <div class="field"><label for="dateField">Date</label><input type="text" id="dateField" readonly placeholder="Chosen from slot"></div>
+            <div class="field"><label for="timeField">Time</label><input type="text" id="timeField" readonly placeholder="Chosen from slot"></div>
+          </div>
+          <div class="field">
+            <label for="topicSelect">Consultation topic</label>
+            <select id="topicSelect" required></select>
+            <span class="error" id="err-topicSelect"></span>
+          </div>
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input type="text" id="fullName" autocomplete="name" required>
+            <span class="error" id="err-fullName"></span>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" autocomplete="email" required>
+              <span class="error" id="err-email"></span>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input type="tel" id="phone" autocomplete="tel" placeholder="e.g. 0771234567" required>
+              <span class="error" id="err-phone"></span>
+            </div>
+          </div>
+          <p id="formMessage" class="state" role="alert" hidden></p>
+          <div class="row">
+            <button type="submit" class="btn">Book consultation</button>
+            <button type="reset" class="btn btn-light" id="resetBtn">Reset</button>
+          </div>
+        </form>
+
+        <aside class="summary" aria-live="polite">
+          <h3>Booking summary</h3>
+          <div id="summaryBox"><p class="state state-empty">No booking yet. Fill in the form and your summary will appear here.</p></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><strong>Group 10 WEB PROJECT WORK</strong></p>
+    <p>Muni University, FACULTY OF TECHNOSCIENCE</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
