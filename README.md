@@ -25,9 +25,9 @@ Open `index.html` in any web browser.
 
 ## Group members and contributions
 | Member                      Contribution 
-Anviko Grace                  Expalanation of the html
-Ariku Jimmy                   root,header,background,body,layout,and stat bar.(CSS)
-Lucky Brenda                  filter,stat cards,booking,footer,and responsive design.(CSS)
+Lucky Brenda                  Created the html
+Amviko Grace                  root,header,background,body,layout,and stat bar.(CSS)
+Ariku Jimmy                   filter,statcards,booking,footer,and responsive design.(CSS)
 Asizua David Livingstone      rawstaff,helpers,getstaff,stats,search and filter, search function(Javacript)
 Katabira Solomon              booking form.(Javascript)
 ## Deployment
