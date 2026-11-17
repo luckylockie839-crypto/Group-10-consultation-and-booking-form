@@ -31,4 +31,5 @@ Ariku Jimmy                   filter,statcards,booking,footer,and responsive des
 Asizua David Livingstone      rawstaff,helpers,getstaff,stats,search and filter, search function(Javacript)
 Katabira Solomon              booking form.(Javascript)
 ## Deployment
-Deployed link: (add GitHub Pages link here)
+Deployed link: (https://luckylockie839-crypto.github.io/Group-10-consultation-and-booking-form/)
+
