@@ -74,6 +74,14 @@ function getStaff(id) {
   return staffData.find(function (s) { return s.id === id; });
 }
 
+// Slots are interpreted in the visitor's local time, and expire at their start time.
+function isPastSlot(slot) {
+  var start = new Date(slot.date);
+  var parts = slot.time.split(":");
+  start.setHours(Number(parts[0]), Number(parts[1]), 0, 0);
+  return start.getTime() <= Date.now();
+}
+
 function prepareData() {
   staffData = rawStaff.map(function (s) {
     s.slots = s.slots.map(function (r, i) {
@@ -88,7 +96,7 @@ function prepareData() {
 function updateStats() {
   var open = 0;
   staffData.forEach(function (s) {
-    s.slots.forEach(function (sl) { if (!sl.booked) { open++; } });
+    s.slots.forEach(function (sl) { if (!sl.booked && !isPastSlot(sl)) { open++; } });
   });
   document.getElementById("statStaff").textContent = staffData.length;
   document.getElementById("statSlots").textContent = open;
@@ -125,7 +133,8 @@ function renderStaff(list) {
   list.forEach(function (s) {
     var slotHtml = s.slots.map(function (sl) {
       var label = formatDate(sl.date).split(",")[0] + " " + sl.date.getDate() + "/" + (sl.date.getMonth() + 1) + " at " + sl.time;
-      return '<li class="slot ' + (sl.booked ? "taken" : "free") + '">' + label + (sl.booked ? " (Booked)" : " (Available)") + "</li>";
+      var unavailable = sl.booked || isPastSlot(sl);
+      return '<li class="slot ' + (unavailable ? "taken" : "free") + '">' + label + (sl.booked ? " (Booked)" : isPastSlot(sl) ? " (Past)" : " (Available)") + "</li>";
     }).join("");
 
     var card = document.createElement("article");
@@ -152,8 +161,9 @@ function fillSlots() {
   }
   el.slot.innerHTML = '<option value="">-- Select a time slot --</option>' +
     staff.slots.map(function (sl) {
-      var text = formatDate(sl.date) + " at " + sl.time + (sl.booked ? " - Booked" : "");
-      return '<option value="' + sl.id + '"' + (sl.booked ? " disabled" : "") + ">" + text + "</option>";
+      var unavailable = sl.booked || isPastSlot(sl);
+      var text = formatDate(sl.date) + " at " + sl.time + (sl.booked ? " - Booked" : isPastSlot(sl) ? " - Past" : "");
+      return '<option value="' + sl.id + '"' + (unavailable ? " disabled" : "") + ">" + text + "</option>";
     }).join("");
   el.topic.innerHTML = '<option value="">-- Select a topic --</option>' +
     staff.topics.concat(["Other"]).map(function (t) { return "<option>" + t + "</option>"; }).join("");
@@ -175,12 +185,19 @@ function setError(input, text) {
 
 function validateForm() {
   var ok = true;
-  ok = setError(el.staff, el.staff.value ? "" : "Please choose a staff member.") && ok;
-  ok = setError(el.slot, el.slot.value ? "" : "Please choose an available slot.") && ok;
-  ok = setError(el.topic, el.topic.value ? "" : "Please choose a topic.") && ok;
-  ok = setError(el.name, el.name.value.trim().length >= 3 ? "" : "Enter your full name (at least 3 letters).") && ok;
-  ok = setError(el.email, /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.email.value.trim()) ? "" : "Enter a valid email address.") && ok;
-  ok = setError(el.phone, /^\+?[0-9\s-]{9,15}$/.test(el.phone.value.trim()) ? "" : "Enter a valid phone number (9 to 15 digits).") && ok;
+  var staff = getStaff(Number(el.staff.value));
+  var slot = staff && staff.slots.find(function (sl) { return sl.id === el.slot.value; });
+  var name = el.name.value.trim();
+  var email = el.email.value.trim();
+  var phone = el.phone.value.replace(/\s/g, "");
+  var validName = /^\p{L}[\p{L}\p{M}'’.\- ]*$/u.test(name) && (name.match(/\p{L}/gu) || []).length >= 3;
+  var validEmail = /^[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,63}$/.test(email) && el.email.validity.valid;
+  ok = setError(el.staff, staff ? "" : "Please choose a staff member.") && ok;
+  ok = setError(el.slot, slot && !slot.booked && !isPastSlot(slot) ? "" : "Please choose an available future slot.") && ok;
+  ok = setError(el.topic, staff && staff.topics.concat(["Other"]).indexOf(el.topic.value) !== -1 ? "" : "Please choose a topic.") && ok;
+  ok = setError(el.name, validName ? "" : "Enter your name using at least 3 letters; spaces, apostrophes, periods and hyphens are allowed.") && ok;
+  ok = setError(el.email, validEmail ? "" : "Enter a valid email address.") && ok;
+  ok = setError(el.phone, /^(\+256|0)7[0-9]{8}$/.test(phone) ? "" : "Wrong format! Use 0771234567 or +256771234567") && ok;
   return ok;
 }
 
@@ -192,7 +209,7 @@ function showMessage(text, type) {
 
 function showSummary(b) {
   el.summary.innerHTML =
-    '<p class="state state-success">Booking request received. Reference: ' + b.ref + "</p>" +
+    '<p class="state state-success">Demo summary only; no booking was sent. Demo reference: ' + b.ref + "</p>" +
     "<dl>" +
     "<dt>Staff</dt><dd>" + escapeHtml(b.staff.name) + "</dd>" +
     "<dt>Department</dt><dd>" + escapeHtml(b.staff.dept) + "</dd>" +
@@ -209,12 +226,14 @@ function bookSlot(event) {
   event.preventDefault();
   if (!validateForm()) {
     showMessage("Please correct the highlighted fields and try again.", "error");
+    searchStaff();
+    updateStats();
     return;
   }
   var staff = getStaff(Number(el.staff.value));
   var slot = staff.slots.find(function (sl) { return sl.id === el.slot.value; });
-  if (!slot || slot.booked) {
-    showMessage("Sorry, that slot has just been taken. Please choose another one.", "error");
+  if (!slot || slot.booked || isPastSlot(slot)) {
+    showMessage("That slot is no longer available. Please choose another one.", "error");
     fillSlots();
     return;
   }
@@ -222,7 +241,7 @@ function bookSlot(event) {
   var booking = {
     ref: "UC-" + String(requests.length + 1).padStart(3, "0"),
     staff: staff, slot: slot, topic: el.topic.value,
-    name: el.name.value.trim(), email: el.email.value.trim(), phone: el.phone.value.trim()
+    name: el.name.value.trim(), email: el.email.value.trim(), phone: el.phone.value.replace(/\s/g, "")
   };
   requests.push(booking);
   showSummary(booking);
@@ -230,7 +249,7 @@ function bookSlot(event) {
   fillSlots();
   searchStaff();
   updateStats();
-  showMessage("Success! Your consultation has been booked.", "success");
+  showMessage("Demo complete. No real consultation was booked or sent.", "success");
 }
 
 function chooseStaffFromCard(event) {
@@ -264,9 +283,7 @@ el.staff.addEventListener("change", fillSlots);
 el.slot.addEventListener("change", showSelectedSlot);
 el.form.addEventListener("submit", bookSlot);
 el.form.addEventListener("reset", function () {
-  setTimeout(function () {
-    fillSlots();
-    showMessage("", "success");
-    [el.staff, el.slot, el.topic, el.name, el.email, el.phone].forEach(function (i) { setError(i, ""); });
-  }, 0);
+  showMessage("", "success");
+  [el.staff, el.slot, el.topic, el.name, el.email, el.phone].forEach(function (i) { setError(i, ""); });
+  setTimeout(function () { fillSlots(); }, 0);
 });
