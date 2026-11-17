@@ -27,7 +27,7 @@ inset: 0;
 z-index: -1;
 background:
 linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-url("images/campus.jpg") center / cover no-repeat;
+url("../images/campus.jpg") center / cover no-repeat;
 }
 
 .skip-link { position: absolute;
