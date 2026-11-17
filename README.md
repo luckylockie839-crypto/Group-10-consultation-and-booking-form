@@ -16,9 +16,9 @@ A browser-based tool where students can view staff consultation schedules, searc
 
 ## Folder structure
 - `index.html` - page structure
-- `css/style.css` - styles
-- `js/script.js` - search, filtering, slot counting and booking functions
-- `images/` - university logo and campus background
+- `style.css` - styles
+- `script.js` - search, filtering, slot counting and booking functions
+- `images/` - expected location for the university logo and campus background (images not yet included)
 
 ## How to run
 Open `index.html` in any web browser.
