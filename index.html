@@ -98,7 +98,9 @@
             </div>
             <div class="field">
               <label for="phone">Phone number</label>
-              <input type="tel" id="phone" autocomplete="tel" placeholder="e.g. 0771234567" required>
+              <input type="tel" id="phone" autocomplete="tel" placeholder="e.g. 0771234567"
+                pattern="^(\+256|0)7[0-9]{8}$" required>
+              
               <span class="error" id="err-phone"></span>
             </div>
           </div>
