@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Consultation and Office Hour Booking Tool - Muni University, Faculty of TECHNOSCIENCE, Group 10">
   <title>Group 10 | Consultation and Office Hour Booking Tool</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="bg-image" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <header class="site-header" id="home">
-    <img class="logo" src="muni-logo.png" alt="Muni University crest with the motto Transforming Lives">
+    <img class="logo" src="images/muni-logo.png" alt="Muni University crest with the motto Transforming Lives">
     <h1 class="org-title">MUNI UNIVERSITY</h1>
     <h2 class="tool-title">Consultation and Office Hour Booking Tool</h2>
     <nav class="main-nav" aria-label="Main navigation">
@@ -28,7 +28,7 @@
     <section class="panel hero" aria-labelledby="hero-title">
       <p class="eyebrow">University support, made simple</p>
       <h2 id="hero-title">Get the guidance you need. <span class="accent">Book time that works.</span></h2>
-      <p class="lead">Demo only: staff and schedules are sample data. Nothing is sent or saved, and no real consultation is booked. Data resets when you reload the page.</p>
+      <p class="lead">Find lecturers and academic advisers, check their consultation hours, and request a meeting in a few simple steps.</p>
       <div class="steps">
         <article class="step"><h3>1. Choose a staff member</h3><p>Search by name, department or topic.</p></article>
         <article class="step"><h3>2. Pick a free slot</h3><p>Occupied slots cannot be selected.</p></article>
@@ -40,7 +40,7 @@
     <ul class="stats" aria-label="Summary figures">
       <li><strong id="statStaff">0</strong><span>Staff members</span></li>
       <li><strong id="statSlots">0</strong><span>Open slots</span></li>
-      <li><strong id="statRequests">0</strong><span>Demo requests this session</span></li>
+      <li><strong id="statRequests">0</strong><span>Requests this session</span></li>
       <li><strong>3</strong><span>Simple booking steps</span></li>
     </ul>
 
@@ -68,12 +68,12 @@
         <form id="bookingForm" novalidate>
           <div class="field">
             <label for="staffSelect">Staff member</label>
-            <select id="staffSelect" aria-describedby="err-staffSelect" required></select>
+            <select id="staffSelect" required></select>
             <span class="error" id="err-staffSelect"></span>
           </div>
           <div class="field">
             <label for="slotSelect">Available time slot</label>
-            <select id="slotSelect" aria-describedby="err-slotSelect" required></select>
+            <select id="slotSelect" required></select>
             <span class="error" id="err-slotSelect"></span>
           </div>
           <div class="row">
@@ -82,29 +82,31 @@
           </div>
           <div class="field">
             <label for="topicSelect">Consultation topic</label>
-            <select id="topicSelect" aria-describedby="err-topicSelect" required></select>
+            <select id="topicSelect" required></select>
             <span class="error" id="err-topicSelect"></span>
           </div>
           <div class="field">
             <label for="fullName">Full name</label>
-            <input type="text" id="fullName" autocomplete="name" aria-describedby="err-fullName" required>
+            <input type="text" id="fullName" autocomplete="name" required>
             <span class="error" id="err-fullName"></span>
           </div>
           <div class="row">
             <div class="field">
               <label for="email">Email address</label>
-              <input type="email" id="email" autocomplete="email" aria-describedby="err-email" required>
+              <input type="email" id="email" autocomplete="email" required>
               <span class="error" id="err-email"></span>
             </div>
             <div class="field">
               <label for="phone">Phone number</label>
-              <input type="tel" id="phone" autocomplete="tel" placeholder="e.g. 0771234567" aria-describedby="err-phone" required>
+              <input type="tel" id="phone" autocomplete="tel" placeholder="e.g. 0771234567"
+                pattern="^(\+256|0)7[0-9]{8}$" required>
+              
               <span class="error" id="err-phone"></span>
             </div>
           </div>
           <p id="formMessage" class="state" role="alert" hidden></p>
           <div class="row">
-            <button type="submit" class="btn">Try demo booking</button>
+            <button type="submit" class="btn">Book consultation</button>
             <button type="reset" class="btn btn-light" id="resetBtn">Reset</button>
           </div>
         </form>
@@ -122,6 +124,6 @@
     <p>Muni University, FACULTY OF TECHNOSCIENCE</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
