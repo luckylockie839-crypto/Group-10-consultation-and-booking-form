@@ -189,6 +189,7 @@ function validateForm() {
   var slot = staff && staff.slots.find(function (sl) { return sl.id === el.slot.value; });
   var name = el.name.value.trim();
   var email = el.email.value.trim();
+  var phone = el.phone.value.replace(/\s/g, "");
   var validName = /^\p{L}[\p{L}\p{M}'’.\- ]*$/u.test(name) && (name.match(/\p{L}/gu) || []).length >= 3;
   var validEmail = /^[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,63}$/.test(email) && el.email.validity.valid;
   ok = setError(el.staff, staff ? "" : "Please choose a staff member.") && ok;
@@ -196,7 +197,7 @@ function validateForm() {
   ok = setError(el.topic, staff && staff.topics.concat(["Other"]).indexOf(el.topic.value) !== -1 ? "" : "Please choose a topic.") && ok;
   ok = setError(el.name, validName ? "" : "Enter your name using at least 3 letters; spaces, apostrophes, periods and hyphens are allowed.") && ok;
   ok = setError(el.email, validEmail ? "" : "Enter a valid email address.") && ok;
-  ok = setError(el.phone, /^\+?[0-9]{9,15}$/.test(el.phone.value.trim()) ? "" : "Enter 9 to 15 digits, with an optional leading +.") && ok;
+  ok = setError(el.phone, /^(\+256|0)7[0-9]{8}$/.test(phone) ? "" : "Wrong format! Use 0771234567 or +256771234567") && ok;
   return ok;
 }
 
@@ -240,7 +241,7 @@ function bookSlot(event) {
   var booking = {
     ref: "UC-" + String(requests.length + 1).padStart(3, "0"),
     staff: staff, slot: slot, topic: el.topic.value,
-    name: el.name.value.trim(), email: el.email.value.trim(), phone: el.phone.value.trim()
+    name: el.name.value.trim(), email: el.email.value.trim(), phone: el.phone.value.replace(/\s/g, "")
   };
   requests.push(booking);
   showSummary(booking);
