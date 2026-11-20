@@ -26,10 +26,10 @@ This is a browser-only **demonstration** with sample staff and schedules. It doe
 Open `index.html` in a modern browser with JavaScript enabled. The files must remain together in the same folder. No installation or server is required.
 
 ## Group members and contributions
-| Member | Contribution |
-| --- | --- |
-| Lucky Brenda | Created the HTML |
-| Amviko Grace | Root, header, background, body, layout, and stat bar (CSS) |
-| Ariku Jimmy | Filter, stat cards, booking, footer, and responsive design (CSS) |
-| Asizua David Livingstone | rawstaff, helpers, getstaff, stats, search and filter, search function (JavaScript) |
-| Katabira Solomon | Booking form (JavaScript) |
+| Member | Registration number | Contribution |
+| --- | --- | --- |
+| Lucky Brenda | Not yet provided | Created the HTML |
+| Amviko Grace | Not yet provided | Root, header, background, body, layout, and stat bar (CSS) |
+| Ariku Jimmy | Not yet provided | Filter, stat cards, booking, footer, and responsive design (CSS) |
+| Asizua David Livingstone | 2601202485 | rawstaff, helpers, getstaff, stats, search and filter, search function (JavaScript) |
+| Katabira Solomon | 2601202193 | Booking form (JavaScript) |
