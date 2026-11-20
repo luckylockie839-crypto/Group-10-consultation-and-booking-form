@@ -2,6 +2,13 @@
 
 Deployed link: https://luckylockie839-crypto.github.io/Group-10-consultation-and-booking-form/
 
+## Problem and intended users
+Students may find it difficult to know when university staff are available for consultations. This project demonstrates how students could search for staff, view available time slots and choose a suitable time. It is intended for students seeking guidance and staff offering consultations.
+
+The current version is a demonstration: it uses sample data and does not make real bookings or contact staff.
+
+*This section was drafted with AI assistance.*
+
 ## About
 This is a browser-only **demonstration** with sample staff and schedules. It does not send requests, contact staff, reserve real consultations or store data on a server. Demo bookings and reference numbers exist only in memory and are lost on reload; availability is not shared between visitors or tabs. Do not enter sensitive personal information.
 
