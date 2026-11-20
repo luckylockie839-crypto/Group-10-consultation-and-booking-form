@@ -2,8 +2,6 @@
 
 Deployed link: https://luckylockie839-crypto.github.io/Group-10-consultation-and-booking-form/
 
-Muni University, Faculty of TECHNOSCIENCE - ITM 1131 Web Application Development.
-
 ## About
 This is a browser-only **demonstration** with sample staff and schedules. It does not send requests, contact staff, reserve real consultations or store data on a server. Demo bookings and reference numbers exist only in memory and are lost on reload; availability is not shared between visitors or tabs. Do not enter sensitive personal information.
 
@@ -33,3 +31,5 @@ Open `index.html` in a modern browser with JavaScript enabled. The files must re
 | Ariku Jimmy | 2601202065 | Filter, stat cards, booking, footer, and responsive design (CSS) |
 | Asizua David Livingstone | 2601202485 | rawstaff, helpers, getstaff, stats, search and filter, search function (JavaScript) |
 | Katabira Solomon | 2601202193 | Booking form (JavaScript) |
+##Acknowledgement of tools used
+Ai assisted us to understand what our scenario required and also helped us to deeply understand what we had to follow
