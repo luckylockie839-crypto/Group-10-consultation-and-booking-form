@@ -31,5 +31,5 @@ Open `index.html` in a modern browser with JavaScript enabled. The files must re
 | Ariku Jimmy | 2601202065 | Filter, stat cards, booking, footer, and responsive design (CSS) |
 | Asizua David Livingstone | 2601202485 | rawstaff, helpers, getstaff, stats, search and filter, search function (JavaScript) |
 | Katabira Solomon | 2601202193 | Booking form (JavaScript) |
-##Acknowledgement of tools used
+## Acknowledgement of tools used
 Ai assisted us to understand what our scenario required and also helped us to deeply understand what we had to follow
