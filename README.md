@@ -28,8 +28,8 @@ Open `index.html` in a modern browser with JavaScript enabled. The files must re
 ## Group members and contributions
 | Member | Registration number | Contribution |
 | --- | --- | --- |
-| Lucky Brenda | Not yet provided | Created the HTML |
+| Lucky Brenda | 2601202489 | Created the HTML |
 | Amviko Grace | Not yet provided | Root, header, background, body, layout, and stat bar (CSS) |
-| Ariku Jimmy | Not yet provided | Filter, stat cards, booking, footer, and responsive design (CSS) |
+| Ariku Jimmy | 2601202065 | Filter, stat cards, booking, footer, and responsive design (CSS) |
 | Asizua David Livingstone | 2601202485 | rawstaff, helpers, getstaff, stats, search and filter, search function (JavaScript) |
 | Katabira Solomon | 2601202193 | Booking form (JavaScript) |
