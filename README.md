@@ -29,7 +29,7 @@ Open `index.html` in a modern browser with JavaScript enabled. The files must re
 | Member | Registration number | Contribution |
 | --- | --- | --- |
 | Lucky Brenda | 2601202489 | Created the HTML |
-| Amviko Grace | 2501202157 | Root, header, background, body, layout, and stat bar (CSS) |
+| Anviko Grace | 2501202157 | Root, header, background, body, layout, and stat bar (CSS) |
 | Ariku Jimmy | 2601202065 | Filter, stat cards, booking, footer, and responsive design (CSS) |
 | Asizua David Livingstone | 2601202485 | rawstaff, helpers, getstaff, stats, search and filter, search function (JavaScript) |
 | Katabira Solomon | 2601202193 | Booking form (JavaScript) |
